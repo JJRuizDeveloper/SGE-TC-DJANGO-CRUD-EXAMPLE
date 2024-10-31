@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pokedex</h1>
+    <a href="{% url 'create' %}">Add Pokemon</a>
+    <ul>
+        {% for pokemon in pokemons %}
+        <li>
+            {{ pokemon.name }} 
+            <a href="{%  url 'update' pokemon.id %}">Edit</a> 
+            <form action="{% url 'delete' pokemon.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
